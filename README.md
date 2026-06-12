@@ -1,97 +1,96 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# SAJU TALK - AI 사주 상담 앱
 
-# Getting Started
+AI 사주 전문가와 나누는 깊이 있는 사주 상담 서비스의 Android 앱입니다.
+WebView 기반으로 [phrygia-saju-talk-web](https://phrygia-saju-talk-web.vercel.app)을 래핑하며, FCM 푸시 알림 및 Google AdMob 광고 기능을 포함합니다.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## 기술 스택
 
-## Step 1: Start Metro
+- **React Native** 0.85.3 (New Architecture)
+- **TypeScript**
+- **Firebase Cloud Messaging** — 푸시 알림
+- **Google AdMob** — 배너 광고
+- **AsyncStorage** — 알림 내역 로컬 저장
+- **react-native-webview** — 웹앱 래핑
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## 주요 기능
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+- WebView 기반 웹앱 렌더링
+- 당겨서 새로고침 (최상단에서만 동작)
+- FCM 푸시 알림 수신 및 인앱 배너 표시
+- 푸시 알림 딥링크 (특정 URL 페이지로 이동)
+- 알림 내역 저장 및 조회
+- 알림 설정 (켜기/끄기)
+- 네트워크 오프라인 감지
+- Google AdMob 배너 광고
 
-```sh
-# Using npm
-npm start
+## 프로젝트 구조
 
-# OR using Yarn
-yarn start
+```
+src/
+├── components/
+│   ├── ErrorScreen/          # 페이지 로딩 오류 화면
+│   ├── Notification/
+│   │   ├── NotificationBanner/        # 포그라운드 알림 배너
+│   │   ├── NotificationHistoryPage/   # 알림 내역 화면
+│   │   └── NotificationSettingsModal/ # 알림 설정 모달
+│   ├── OfflineScreen/        # 네트워크 오프라인 화면
+│   ├── OrbitAnimation/       # 스플래시 오빗 애니메이션
+│   ├── Splash/               # 스플래시 화면
+│   └── StarBackground/       # 별 배경 애니메이션
+└── hooks/
+    ├── useNetwork.ts          # 네트워크 연결 상태
+    └── useNotifications.ts    # 알림 상태 및 AsyncStorage 관리
 ```
 
-## Step 2: Build and run your app
+## 시작하기
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+### 요구사항
 
-### Android
+- Node.js 20+
+- Android Studio
+- JDK 17
 
-```sh
-# Using npm
-npm run android
+### 설치
 
-# OR using Yarn
+```bash
+yarn install
+```
+
+### 환경 설정
+
+`android/app/google-services.json` 파일을 Firebase 콘솔에서 다운로드하여 배치하세요.
+
+릴리즈 빌드 시 `android/gradle.properties`에 키스토어 정보를 추가하세요:
+
+```
+MYAPP_UPLOAD_STORE_FILE=sajutalk.keystore
+MYAPP_UPLOAD_KEY_ALIAS=sajutalk
+MYAPP_UPLOAD_STORE_PASSWORD=...
+MYAPP_UPLOAD_KEY_PASSWORD=...
+```
+
+### 실행
+
+```bash
+# Metro 시작
+yarn start
+
+# Android 실행
 yarn android
 ```
 
-### iOS
+### 빌드
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+```bash
+# 릴리즈 APK
+cd android && ./gradlew assembleRelease
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
+# 릴리즈 AAB (Play Store)
+cd android && ./gradlew bundleRelease
 ```
 
-Then, and every time you update your native dependencies, run:
+## 주의사항
 
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- `android/app/google-services.json` — Git 제외 (Firebase 설정)
+- `android/gradle.properties` — Git 제외 (키스토어 비밀번호 포함)
+- `android/app/sajutalk.keystore` — Git 제외 (서명 키)

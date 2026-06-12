@@ -28,6 +28,8 @@ build/
 .idea
 .gradle
 local.properties
+gradle.properties
+android/gradle.properties
 *.iml
 *.hprof
 .cxx/
@@ -65,6 +67,13 @@ yarn-error.log
 
 # testing
 /coverage
+
+# Firebase
+android/app/google-services.json
+ios/GoogleService-Info.plist
+
+# Claude Code
+.claude/
 
 # Yarn
 .yarn/*
